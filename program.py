@@ -33,7 +33,7 @@ def append_pages_to_pdf(page_indexes: List[int], input_pdf_name: str, output_pdf
     with open(output_pdf_name, "wb") as out_pdf:
         pdf_writer.write(out_pdf)
 
-    print(f"Appended pages {''.join(page_indexes)} from {input_pdf_name} to {output_pdf_name}")
+    print(f"Appended pages from {input_pdf_name} to {output_pdf_name}")
 
 
 def get_all_pages(pdf_name: str) -> PdfFileWriter:
