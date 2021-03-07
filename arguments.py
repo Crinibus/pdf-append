@@ -30,9 +30,10 @@ def argparse_setup() -> ArgumentParser.parse_args:
         '--page',
         dest='page_index',
         metavar='<page_index>',
-        help='the index of the page to append to output file',
+        help='index of pages to append to output file',
         type=int,
         required=True,
+        nargs='*',
     )
 
     parser.add_argument(
