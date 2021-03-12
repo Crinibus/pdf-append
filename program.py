@@ -9,18 +9,6 @@ def create_pdf(filename: str):
         pdf_writer.write(file)
 
 
-def add_page_to_pdf(page_index: int, input_pdf_name: str, output_pdf_name: str):
-    pdf_writer = PdfFileWriter()
-
-    pdf = PdfFileReader(input_pdf_name)
-
-    pdf_writer.addPage(pdf.getPage(page_index-1))
-
-    write_pdf(output_pdf_name, pdf_writer)
-
-    print(f"Added page {page_index} from pdf {input_pdf_name} to pdf {output_pdf_name}")
-
-
 def append_pages_to_pdf(page_indexes: List[int], input_pdf_name: str, output_pdf_name: str):
     pdf_writer = get_all_pages(output_pdf_name)
 
