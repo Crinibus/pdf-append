@@ -12,6 +12,7 @@ def argparse_setup() -> ArgumentParser.parse_args:
         metavar='<filename>',
         help='the output pdf file to create or append pages to',
         type=str,
+        default="",
     )
 
     parser.add_argument(
@@ -79,8 +80,8 @@ def validate_arguments(parser: ArgumentParser) -> None:
     elif args.duplicate:
         if args.create or args.remove:
             parser.error("When using --duplicate, then either --create or --remove can't be used")
-        elif not args.input_file and not args.output_file:
-            parser.error("When using --duplicate, then --input and --output is required")
+        elif not args.input_file:
+            parser.error("When using --duplicate, then --input is required")
     else:
         if args.output_file:
             if not args.input_file or not args.page_indexes:
