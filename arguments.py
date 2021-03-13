@@ -49,6 +49,14 @@ def argparse_setup() -> ArgumentParser.parse_args:
         action='store_true',
     )
 
+    parser.add_argument(
+        '-d',
+        '--duplicate',
+        dest='duplicate',
+        help='duplicate input pdf file',
+        action='store_true',
+    )
+
     validate_arguments(parser)
 
     return parser.parse_args()
@@ -59,11 +67,20 @@ def validate_arguments(parser: ArgumentParser) -> None:
     args = parser.parse_args()
 
     if args.remove:
-        if not args.input_file or not args.page_indexes:
+        if args.create or args.duplicate:
+            parser.error("When using --remove, then either --create or --duplicate can't be used")
+        elif not args.input_file or not args.page_indexes:
             parser.error("When using --remove, then --input and --page is required")
     elif args.create:
-        if not args.output_file:
+        if args.remove or args.duplicate:
+            parser.error("When using --create, then either --remove or --duplicate can't be used")
+        elif not args.output_file:
             parser.error("When using --create, then --output is required")
+    elif args.duplicate:
+        if args.create or args.remove:
+            parser.error("When using --duplicate, then either --create or --remove can't be used")
+        elif not args.input_file and not args.output_file:
+            parser.error("When using --duplicate, then --input and --output is required")
     else:
         if args.output_file:
             if not args.input_file or not args.page_indexes:

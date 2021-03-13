@@ -36,6 +36,22 @@ def remove_pages_from_pdf(page_indexes: List[int], pdf_name: str):
     print(f"Removed page(s) from {pdf_name}")
 
 
+def duplicate_pdf(input_pdf_name: str, output_pdf_name: str = ""):
+    pdf = PdfFileReader(input_pdf_name)
+
+    pdf_writer = PdfFileWriter()
+
+    for index in range(pdf.getNumPages()):
+        pdf_writer.addPage(pdf.getPage(index))
+
+    if output_pdf_name == "":
+        output_pdf_name = f"{input_pdf_name}(1)"
+
+    write_pdf(output_pdf_name, pdf_writer)
+
+    print(f"Duplicated {input_pdf_name}")
+
+
 def get_all_pages(pdf_name: str) -> PdfFileWriter:
     pdf = PdfFileReader(pdf_name)
 
@@ -56,8 +72,9 @@ if __name__ == "__main__":
 
     if args.create:
         create_pdf(args.output_file)
-
-    if args.remove:
+    elif args.remove:
         remove_pages_from_pdf(args.page_indexes, args.input_file)
+    elif args.duplicate:
+        duplicate_pdf(args.input_file, args.output_file)
     else:
         append_pages_to_pdf(args.page_indexes, args.input_file, args.output_file)
