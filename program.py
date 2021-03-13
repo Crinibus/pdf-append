@@ -45,7 +45,8 @@ def duplicate_pdf(input_pdf_name: str, output_pdf_name: str = ""):
         pdf_writer.addPage(pdf.getPage(index))
 
     if output_pdf_name == "":
-        output_pdf_name = f"{input_pdf_name}(1)"
+        input_basename = input_pdf_name.split(".pdf")[0]
+        output_pdf_name = f"{input_basename}(1).pdf"
 
     write_pdf(output_pdf_name, pdf_writer)
 
