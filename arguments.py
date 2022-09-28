@@ -75,6 +75,10 @@ def validate_arguments(parser: ArgumentParser) -> None:
     """Validate arguments"""
     args = parser.parse_args()
 
+    if args.page_indexes:
+        if not all([page_index >= 0 for page_index in args.page_indexes]):
+            parser.error("Page indexes can't be negative numbers")
+
     if args.remove:
         if args.create or args.duplicate:
             parser.error("When using --remove, then either --create or --duplicate can't be used")
