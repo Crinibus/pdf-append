@@ -43,6 +43,14 @@ def argparse_setup() -> ArgumentParser.parse_args:
     )
 
     parser.add_argument(
+        '-a',
+        '--append',
+        dest='append',
+        help='append pages from input pdf file to output file',
+        action='store_true',
+    )
+
+    parser.add_argument(
         '-r',
         '--remove',
         dest='remove',
