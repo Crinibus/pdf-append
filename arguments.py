@@ -6,64 +6,64 @@ def argparse_setup() -> ArgumentParser.parse_args:
     parser = ArgumentParser()
 
     parser.add_argument(
-        '-o',
-        '--output',
-        dest='output_file',
-        metavar='<filename>',
-        help='the output pdf file to create or append pages to',
+        "-o",
+        "--output",
+        dest="output_file",
+        metavar="<filename>",
+        help="the output pdf file to create or append pages to",
         type=str,
         default="",
     )
 
     parser.add_argument(
-        '-i',
-        '--input',
-        dest='input_file',
-        metavar='<filename>',
-        help='the input pdf file to take pages from',
+        "-i",
+        "--input",
+        dest="input_file",
+        metavar="<filename>",
+        help="the input pdf file to take pages from",
         type=str,
     )
 
     parser.add_argument(
-        '-p',
-        '--page',
-        dest='page_indexes',
-        metavar='<page_index>',
-        help='index of pages to append to output file',
+        "-p",
+        "--page",
+        dest="page_indexes",
+        metavar="<page_index>",
+        help="index of pages to append to output file",
         type=int,
-        nargs='*',
+        nargs="*",
     )
 
     parser.add_argument(
-        '-c',
-        '--create',
-        dest='create',
-        help='create (or override) a pdf file with name of the output file',
-        action='store_true',
+        "-c",
+        "--create",
+        dest="create",
+        help="create (or override) a pdf file with name of the output file",
+        action="store_true",
     )
 
     parser.add_argument(
-        '-a',
-        '--append',
-        dest='append',
-        help='append pages from input pdf file to output file',
-        action='store_true',
+        "-a",
+        "--append",
+        dest="append",
+        help="append pages from input pdf file to output file",
+        action="store_true",
     )
 
     parser.add_argument(
-        '-r',
-        '--remove',
-        dest='remove',
-        help='remove pages from input pdf file',
-        action='store_true',
+        "-r",
+        "--remove",
+        dest="remove",
+        help="remove pages from input pdf file",
+        action="store_true",
     )
 
     parser.add_argument(
-        '-d',
-        '--duplicate',
-        dest='duplicate',
-        help='duplicate input pdf file',
-        action='store_true',
+        "-d",
+        "--duplicate",
+        dest="duplicate",
+        help="duplicate input pdf file",
+        action="store_true",
     )
 
     validate_arguments(parser)

@@ -15,7 +15,7 @@ def append_pages_to_pdf(page_indexes: List[int], input_pdf_name: str, output_pdf
     pdf = PdfFileReader(input_pdf_name)
 
     for index in page_indexes:
-        pdf_writer.addPage(pdf.getPage(index-1))
+        pdf_writer.addPage(pdf.getPage(index - 1))
 
     write_pdf(output_pdf_name, pdf_writer)
 
@@ -28,9 +28,9 @@ def remove_pages_from_pdf(page_indexes: List[int], pdf_name: str):
     pdf_writer = PdfFileWriter()
 
     for index in range(pdf.getNumPages()):
-        if index+1 not in page_indexes:
+        if index + 1 not in page_indexes:
             pdf_writer.addPage(pdf.getPage(index))
-    
+
     write_pdf(pdf_name, pdf_writer)
 
     print(f"Removed page(s) from {pdf_name}")
@@ -59,7 +59,7 @@ def get_all_pages(pdf_name: str) -> PdfFileWriter:
     pdf_writer = PdfFileWriter()
     for page in range(pdf.getNumPages()):
         pdf_writer.addPage(pdf.getPage(page))
-    
+
     return pdf_writer
 
 
