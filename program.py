@@ -73,9 +73,9 @@ if __name__ == "__main__":
 
     if args.create:
         create_pdf(args.output_file)
-    elif args.remove:
+    if args.remove:
         remove_pages_from_pdf(args.page_indexes, args.input_file)
-    elif args.duplicate:
+    if args.duplicate:
         duplicate_pdf(args.input_file, args.output_file)
-    else:
+    if args.append:
         append_pages_to_pdf(args.page_indexes, args.input_file, args.output_file)
