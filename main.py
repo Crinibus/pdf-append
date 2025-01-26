@@ -1,10 +1,10 @@
 from typing import List
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from pypdf import PdfReader, PdfWriter
 from arguments import argparse_setup
 
 
 def create_pdf(filename: str):
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfWriter()
     with open(filename, "wb") as file:
         pdf_writer.write(file)
 
@@ -12,10 +12,10 @@ def create_pdf(filename: str):
 def append_pages_to_pdf(page_indexes: List[int], input_pdf_name: str, output_pdf_name: str):
     pdf_writer = get_all_pages(output_pdf_name)
 
-    pdf = PdfFileReader(input_pdf_name)
+    pdf = PdfReader(input_pdf_name)
 
     for index in page_indexes:
-        pdf_writer.addPage(pdf.getPage(index - 1))
+        pdf_writer.add_page(pdf.get_page(index - 1))
 
     write_pdf(output_pdf_name, pdf_writer)
 
@@ -23,13 +23,13 @@ def append_pages_to_pdf(page_indexes: List[int], input_pdf_name: str, output_pdf
 
 
 def remove_pages_from_pdf(page_indexes: List[int], pdf_name: str):
-    pdf = PdfFileReader(pdf_name)
+    pdf = PdfReader(pdf_name)
 
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfWriter()
 
-    for index in range(pdf.getNumPages()):
+    for index in range(pdf.get_num_pages()):
         if index + 1 not in page_indexes:
-            pdf_writer.addPage(pdf.getPage(index))
+            pdf_writer.add_page(pdf.get_page(index))
 
     write_pdf(pdf_name, pdf_writer)
 
@@ -37,12 +37,12 @@ def remove_pages_from_pdf(page_indexes: List[int], pdf_name: str):
 
 
 def duplicate_pdf(input_pdf_name: str, output_pdf_name: str = ""):
-    pdf = PdfFileReader(input_pdf_name)
+    pdf = PdfReader(input_pdf_name)
 
-    pdf_writer = PdfFileWriter()
+    pdf_writer = PdfWriter()
 
-    for index in range(pdf.getNumPages()):
-        pdf_writer.addPage(pdf.getPage(index))
+    for index in range(pdf.get_num_pages()):
+        pdf_writer.add_page(pdf.get_page(index))
 
     if output_pdf_name == "":
         input_basename = input_pdf_name.split(".pdf")[0]
@@ -53,17 +53,17 @@ def duplicate_pdf(input_pdf_name: str, output_pdf_name: str = ""):
     print(f"Duplicated {input_pdf_name}")
 
 
-def get_all_pages(pdf_name: str) -> PdfFileWriter:
-    pdf = PdfFileReader(pdf_name)
+def get_all_pages(pdf_name: str) -> PdfWriter:
+    pdf = PdfReader(pdf_name)
 
-    pdf_writer = PdfFileWriter()
-    for page in range(pdf.getNumPages()):
-        pdf_writer.addPage(pdf.getPage(page))
+    pdf_writer = PdfWriter()
+    for page in range(pdf.get_num_pages()):
+        pdf_writer.add_page(pdf.get_page(page))
 
     return pdf_writer
 
 
-def write_pdf(filename: str, pdf_writer: PdfFileWriter):
+def write_pdf(filename: str, pdf_writer: PdfWriter):
     with open(filename, "wb") as out_pdf:
         pdf_writer.write(out_pdf)
 
